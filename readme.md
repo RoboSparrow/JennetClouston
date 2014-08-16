@@ -29,3 +29,7 @@ The little app uses the [Google  Translate public API](https://translate.google.
 
 * requires PHP
 * Browser compatibility: > IE 9
+
+License
+=======
+[WTFPL](http://www.wtfpl.net/about/)
