@@ -8,54 +8,54 @@ var curse = '"That is the house of {0}!" she cried. "Blood built it; blood stopp
  * sprintf
  */
 if (!String.format) {
-	String.format = function(format) {
-		var args = Array.prototype.slice.call(arguments, 1);
-		console.log(args);
-		return format.replace(/{(\d+)}/g, function(match, number) {
-			return typeof args[number] != 'undefined' ? args[number] : match;
-		});
-	};
+    String.format = function(format) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        console.log(args);
+        return format.replace(/{(\d+)}/g, function(match, number) {
+            return typeof args[number] != 'undefined' ? args[number] : match;
+        });
+    };
 }
 
-/*^
+/*
  * The curse
  */
 var requestCurse = function(e) {
 
-	if (e.preventDefault) {
-		e.preventDefault();
-	}
-	
-	var wait = document.createElement('pre');
-	wait.appendChild(document.createTextNode('Yer have to wait until Jenny is ready!'));
-	document.getElementById('JennyCloustonsCourse').appendChild(wait);
-	document.getElementById('submit').disabled = true;
-	
-	var victim = [];
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    
+    var wait = document.createElement('pre');
+    wait.appendChild(document.createTextNode('Yer have to wait until Jenny is ready!'));
+    document.getElementById('JennyCloustonsCourse').appendChild(wait);
+    document.getElementById('submit').disabled = true;
+    
+    var victim = [];
 
-	victim.push((this.house.value) ? this.house.value : defaults[0]);
-	victim.push((this.name.value) ? this.name.value : defaults[1]);
-	var query = String.format.apply(this, [curse].concat(victim));
+    victim.push((this.house.value) ? this.house.value : defaults[0]);
+    victim.push((this.name.value) ? this.name.value : defaults[1]);
+    var query = String.format.apply(this, [curse].concat(victim));
 
-	var audio = new Audio();
-	audio.src = './tts.php?ie=utf-8&tl=en&q=' + query;
-	
-	audio.addEventListener("canplaythrough", function() {
-		audio.play();
-		document.getElementById('JennyCloustonsCourse').removeChild(wait); 
-	});
-	audio.addEventListener("ended", function() {
-		document.getElementById('submit').disabled = false;
-	});
+    var audio = new Audio();
+    audio.src = './tts.php?ie=utf-8&tl=en&q=' + query;
+    
+    audio.addEventListener("canplaythrough", function() {
+        audio.play();
+        document.getElementById('JennyCloustonsCourse').removeChild(wait); 
+    });
+    audio.addEventListener("ended", function() {
+        document.getElementById('submit').disabled = false;
+    });
 
-	return;
+    return;
 };
 
 /**
  * Init
  */
 (function(window) {
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.getElementById('JennyCloustonsCourse').addEventListener("submit", requestCurse);
-	});
+    document.addEventListener("DOMContentLoaded", function(event) {
+        document.getElementById('JennyCloustonsCourse').addEventListener("submit", requestCurse);
+    });
 })(window);

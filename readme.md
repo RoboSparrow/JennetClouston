@@ -4,7 +4,7 @@ Jennet Clouston Curse Generator
 **Hoot, hoot! Jenny Clouston at ye service.**
 
 About
----------
+-----
 
 Jennet Clouston is a marginal character from Robert Lois Stevenson's novel ["Kidnapped"](http://en.wikipedia.org/wiki/Kidnapped_%28novel%29).
 The main character David Balfour encounters the *stout, dark, sour-looking woman* on his way to the House of Shaws in Southern Scotland, the castle of his anchestors.
@@ -20,16 +20,17 @@ Taken from: [About.com - Classic Literature](http://classiclit.about.com/library
 HowTo
 -----
 
-Browse to `curse.html` and enter your foes's **name** and **house**.  (If you don't enter anything the defaults from the novel will be used.)
+Browse to `curse.html` and enter your foes's **name** and **house**. (If you don't enter anything the defaults from the novel will be used.)
 
 Tecs
 ----
 
-The little app uses the [Google  Translate public API](https://translate.google.com/) to give Jenny a voice. Unfortunately the  API is not CORS enabled (and  likely never will be), so a small server script is required for fetching and building the mp3 .
+The little app uses the [Google  Translate public API](https://translate.google.com/) to give Jenny a voice. Unfortunately the API is not CORS enabled (and likely never will be), so a small server script is required for fetching and building the mp3 .
 
 * requires PHP
 * Browser compatibility: > IE 9
 
 License
 =======
-[WTFPL](http://www.wtfpl.net/about/)
+
+Non-third party files are licensed under the [WTFPL](http://www.wtfpl.net/about/).
