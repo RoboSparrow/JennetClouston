@@ -28,7 +28,7 @@ var requestCurse = function(e) {
     
     var wait = document.createElement('pre');
     wait.appendChild(document.createTextNode('Yer have to wait until Jenny is ready!'));
-    document.getElementById('JennyCloustonsCourse').appendChild(wait);
+    document.getElementById('JennyCloustonsCurse').appendChild(wait);
     document.getElementById('submit').disabled = true;
     
     var victim = [];
@@ -40,11 +40,11 @@ var requestCurse = function(e) {
     var audio = new Audio();
     audio.src = './tts.php?ie=utf-8&tl=en&q=' + query;
     
-    audio.addEventListener("canplaythrough", function() {
+    audio.addEventListener('canplaythrough', function() {
         audio.play();
-        document.getElementById('JennyCloustonsCourse').removeChild(wait); 
+        document.getElementById('JennyCloustonsCurse').removeChild(wait); 
     });
-    audio.addEventListener("ended", function() {
+    audio.addEventListener('ended', function() {
         document.getElementById('submit').disabled = false;
     });
 
@@ -55,7 +55,7 @@ var requestCurse = function(e) {
  * Init
  */
 (function(window) {
-    document.addEventListener("DOMContentLoaded", function(event) {
-        document.getElementById('JennyCloustonsCourse').addEventListener("submit", requestCurse);
+    document.addEventListener('DOMContentLoaded', function(event) {
+        document.getElementById('JennyCloustonsCurse').addEventListener('submit', requestCurse);
     });
 })(window);
