@@ -22,7 +22,7 @@ HowTo
 
 Browse to `curse.html` and enter your foes's **name** and **house**. (If you don't enter anything the defaults from the novel will be used.)
 
-Tecs
+Techs
 ----
 
 The little app uses the [Google  Translate public API](https://translate.google.com/) to give Jenny a voice. Unfortunately the API is not CORS enabled (and likely never will be), so a small server script is required for fetching and building the mp3 .
