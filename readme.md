@@ -28,7 +28,7 @@ Techs
 The little app uses the [Google  Translate public API](https://translate.google.com/) to give Jenny a voice. Unfortunately the API is not CORS enabled (and likely never will be), so a small server script is required for fetching and building the mp3 .
 
 * requires PHP
-* Browser compatibility: > IE 9
+* Browser compatibility: ES5, lte IE 9
 
 License
 =======
