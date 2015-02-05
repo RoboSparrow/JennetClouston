@@ -1,8 +1,5 @@
 <?php
-// error_reporting(E_ALL);
-//ini_set('display_errors', 1);
-
-// Setting debug prints out data
+// Setting debug prints out raw data
 $debug = (empty($_REQUEST['debug'])) ? false : true;
 
 if (!empty($_REQUEST['q'])) {
