@@ -3,6 +3,9 @@ Jennet Clouston Curse Generator
 
 **Hoot, hoot! Jenny Clouston at ye service.**
 
+*UPDATE:*  The Google Translate API is now only available as a paid service, so the current solution wont work anymore. Darn!
+I am planning to use the [Text to Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) instead. 
+
 About
 -----
 
