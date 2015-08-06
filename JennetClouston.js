@@ -1,9 +1,4 @@
 
-
-/**
- * defaults
- */
-
 var Jennet = (function( window, undefined) {
     'use strict';
 

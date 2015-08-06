@@ -3,9 +3,6 @@ Jennet Clouston Curse Generator
 
 **Hoot, hoot! Jenny Clouston at ye service.**
 
-*UPDATE:*  The Google Translate API is now only available as a paid service, so the current solution wont work anymore. Darn!
-I am planning to use the [Text to Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) instead.
-
 About
 -----
 
@@ -28,7 +25,8 @@ Browse to `curse.html` and enter your foes's **name** and **house**. (If you don
 Techs
 ----
 
-@TODO
+ * Using [Text to Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html)
+ * Browser support: http://caniuse.com/#feat=speech-recognition, gives you a rough idea, but this depends also on your system.
 
 License
 =======
