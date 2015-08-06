@@ -15,6 +15,12 @@
         .changed{
             color: #dd1144;
         }
+        user-content{
+            font-weight: bold;
+        }
+        user-content.updated{
+            color: rgb(186, 57, 37);
+        }
         </style>
     </head>
     <body>
@@ -22,25 +28,25 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <h1>Jenny Cluston's Curse Generator.</h1>
+
         <form id= "JennyCloustonsCurseForm" role="form">
             <p>
                 Jenny Clouston. You shall curse
-                <input type="text" data-index="1" id="Name" name="name" placeholder="Name">! 
+                <input type="text" data-index="1" id="Name" name="name" placeholder="Name">!
                 <select id="Sex" data-index="2" name="sex">
-                    <option value="lad" >He</option>
-                    <option value="lass" >She</option>
+                    <option value="him,his" >He</option>
+                    <option value="her,her" >She</option>
                 </select> belongs to the house of
                 <input type="text" data-index="0" id="House" name="house" placeholder="House">.
             </p>
-
-            <blockquote id="JennyCloustonsCurse"></blockquote>
+            <blockquote id="JennyCloustonsCurse"><jenny>"That is the house of <user-content key="House">Shaws</user-content>!"</jenny><narrator> she cried. </narrator><jenny>"Blood built it; blood stopped the building of it; blood shall bring it down. See here!"</jenny><narrator> she cried again - </narrator><jenny>"I spit upon the ground, and crack my thumb at it! Black be its fall! If ye see <user-content key="Name">the laird</user-content>, tell <user-content key="Sex">him</user-content> what ye hear; tell <user-content key="Sex">him</user-content> this makes the twelve hunner and nineteen time that Jennet Clouston has called down the curse on <user-content key="Sex">him</user-content> and <user-content key="Sex" object="house">his</user-content> house, </jenny><jenny>byre and stable, man, guest, and master, wife, miss, or bairn</jenny><jenny> - black, black be their fall!</jenny>"</blockquote>
             <p>
-                <button id="submit" type="submit">Curse 'em!</button>
+                <button id="Submit">Curse 'em!</button>
             </p>
         </form>
         <footer>
             <p>
-                Powered by <a href="https://translate.google.com/" target="_blank">Google Translate</a>
+                Powered by <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html" target="_blank">Web Speech API</a>
             </p>
         </footer>
     </body>

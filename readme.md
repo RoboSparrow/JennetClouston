@@ -4,7 +4,7 @@ Jennet Clouston Curse Generator
 **Hoot, hoot! Jenny Clouston at ye service.**
 
 *UPDATE:*  The Google Translate API is now only available as a paid service, so the current solution wont work anymore. Darn!
-I am planning to use the [Text to Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) instead. 
+I am planning to use the [Text to Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) instead.
 
 About
 -----
@@ -28,10 +28,7 @@ Browse to `curse.html` and enter your foes's **name** and **house**. (If you don
 Techs
 ----
 
-The little app uses the [Google  Translate public API](https://translate.google.com/) to give Jenny a voice. Unfortunately the API is not CORS enabled (and likely never will be), so a small server script is required for fetching and building the mp3 .
-
-* requires PHP
-* Browser compatibility: ES5, lte IE 9
+@TODO
 
 License
 =======
