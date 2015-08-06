@@ -25,8 +25,8 @@ Browse to `curse.html` and enter your foes's **name** and **house**. (If you don
 Techs
 ----
 
- * Using [Text to Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html)
- * Browser support: http://caniuse.com/#feat=speech-recognition, gives you a rough idea, but this depends also on your system.
+ * Using [Web Speech Api](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html)
+ * Browser support: [caniuse](http://caniuse.com/#feat=speech-recognition), gives you a rough idea, but this depends also on your system.
 
 License
 =======
