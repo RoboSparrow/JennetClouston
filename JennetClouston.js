@@ -80,6 +80,7 @@ var Jennet = (function( window, undefined) {
 })(window);
 
 Jennet.Speech = (function( window, document, undefined) {
+    'use strict';
 
     var _canSpeak = true;
 
@@ -177,6 +178,8 @@ Jennet.Speech = (function( window, document, undefined) {
  */
 
 (function(window) {
+    'use strict';
+
     location.hash = '#home';
     document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('Submit').disabled = true;
