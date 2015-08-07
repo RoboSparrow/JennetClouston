@@ -191,7 +191,7 @@ Jennet.Speech = (function( window, document, undefined) {
         document.addEventListener('_canSpeak:fail:Api', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
-            Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Wep Speech API</a>.', 'error');
+            Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Web Speech API</a>.', 'error');
         }, false);
         document.addEventListener('_canSpeak:fail:System', function(e){
             document.getElementById('Submit').disabled = true;
