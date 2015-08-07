@@ -51,15 +51,14 @@ var Jennet = (function( window, undefined) {
     };
     var read = function(start){
             start = start || false;
+            if(start){
+                progress = 0;
+            }
             if(progress >= (parent.childNodes.length - 1)){
                 document.dispatchEvent(events.curseEnd);
                 return;
             }
             var self = this;
-            if(start){
-                progress = 0;
-            }
-
             var sex = (parent.childNodes[progress].tagName.toLowerCase() === 'jenny') ? 'female' : 'male';
             var story = Jennet.Speech.speak(sex, parent.childNodes[progress].textContent);
 
@@ -205,14 +204,14 @@ Jennet.Speech = (function( window, document, undefined) {
 
         Jennet.init(document.getElementById('JennyCloustonsCurse'));
         document.getElementById('Submit').addEventListener('click', function(e){
-            e.preventDefault();console.log(e);
+            e.preventDefault();
             if(e.target.disabled){
                 return;
             }
             e.target.className = ('pure-button pure-button-primary cursing');
             e.target.disabled = true;
             Jennet.read(true);
-        }, false);
+        });
         document.addEventListener('_jennet:curseEnd', function(e){
             document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').disabled = false;
