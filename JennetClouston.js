@@ -7,6 +7,9 @@ var Jennet = (function( window, undefined) {
     var parent;
     var logger;
     var progress = 0;
+    var events = {
+        curseEnd: new Event('_jennet:curseEnd')
+    };
 
     var log = function(message, status){
         status = status || null;
@@ -48,7 +51,8 @@ var Jennet = (function( window, undefined) {
     };
     var read = function(start){
             start = start || false;
-            if(progress > parent.childNodes.length){
+            if(progress >= (parent.childNodes.length - 1)){
+                document.dispatchEvent(events.curseEnd);
                 return;
             }
             var self = this;
@@ -79,7 +83,12 @@ var Jennet = (function( window, undefined) {
 Jennet.Speech = (function( window, document, undefined) {
 
     var _canSpeak = true;
-    var canSpeakEvent = new Event('_canSpeak');
+
+    var canSpeakEvents = {
+        success: new Event('_canSpeak:success'),
+        failApi: new Event('_canSpeak:fail:Api'),
+        failSystem: new Event('_canSpeak:fail:System')
+    };
 
     var voices = {
         male: null,
@@ -95,13 +104,13 @@ Jennet.Speech = (function( window, document, undefined) {
 
         var my = this;
         whisper.onerror = function (message){
-            Jennet.log('Darn! Your system cannot render Webspeech Audio.', 'error');
+             document.dispatchEvent(canSpeakEvents.failSystem);
             _canSpeak = false;
         };
 
         whisper.onend = function(){
             if(_canSpeak){
-                document.dispatchEvent(canSpeakEvent);
+                document.dispatchEvent(canSpeakEvents.success);
             }
 
         };
@@ -110,7 +119,7 @@ Jennet.Speech = (function( window, document, undefined) {
 
     var testAPI = function(){
         if(!('SpeechSynthesisUtterance' in window)){
-            Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Wep Speech API</a>.', 'error');
+            document.dispatchEvent(canSpeakEvents.failApi);
             _canSpeak = false;
         }
     };
@@ -173,20 +182,40 @@ Jennet.Speech = (function( window, document, undefined) {
         document.getElementById('Submit').disabled = true;
         document.getElementById('Submit').textContent = 'Testing...';
 
-        Jennet.init(document.getElementById('JennyCloustonsCurse'));
-        document.addEventListener('_canSpeak', function(e){
+
+        document.addEventListener('_canSpeak:success', function(e){
             document.getElementById('Submit').disabled = false;
+            document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').textContent = 'Curse \'em!';
+        }, false);
+        document.addEventListener('_canSpeak:fail:Api', function(e){
+            document.getElementById('Submit').disabled = true;
+            document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
+            Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Wep Speech API</a>.', 'error');
+        }, false);
+        document.addEventListener('_canSpeak:fail:System', function(e){
+            document.getElementById('Submit').disabled = true;
+            document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
+            Jennet.log('Darn! Your system cannot render Webspeech Audio.', 'error');
         }, false);
 
         document.getElementById('Name').addEventListener('keyup', function(){Jennet.update(this)});
         document.getElementById('Sex').addEventListener('change', function(){Jennet.update(this)});
         document.getElementById('House').addEventListener('keyup', function(){Jennet.update(this)});
 
+        Jennet.init(document.getElementById('JennyCloustonsCurse'));
         document.getElementById('Submit').addEventListener('click', function(e){
-            e.preventDefault();
+            e.preventDefault();console.log(e);
+            if(e.target.disabled){
+                return;
+            }
+            e.target.className = ('pure-button pure-button-primary cursing');
+            e.target.disabled = true;
             Jennet.read(true);
-
+        }, false);
+        document.addEventListener('_jennet:curseEnd', function(e){
+            document.getElementById('Submit').className = ('pure-button pure-button-primary');
+            document.getElementById('Submit').disabled = false;
         }, false);
 
     });
