@@ -177,6 +177,7 @@ Jennet.Speech = (function( window, document, undefined) {
  */
 
 (function(window) {
+    location.hash = '#home';
     document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('Submit').disabled = true;
         document.getElementById('Submit').textContent = 'Testing...';
@@ -216,6 +217,21 @@ Jennet.Speech = (function( window, document, undefined) {
             document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').disabled = false;
         }, false);
+
+       window.onhashchange = function(){
+            switch(location.hash){
+                case '#about':
+                    document.getElementById('About').className = 'up';
+                break;
+                case '#home':
+                    var nodes = document.querySelectorAll('.up');
+                    for(var i = 0; i < nodes.length; i++){console.log(nodes[i]);
+                        nodes[i].className = nodes[i].className.replace('up', '');
+                    }
+                break;
+            }
+        };
+
 
     });
 })(window);

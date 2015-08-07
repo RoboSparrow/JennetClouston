@@ -1,12 +1,32 @@
+html, body{
+  min-height: 100%;
+}
+body{
+    padding:2em;
+    position: relative;
+}
 blockquote {
     font-size: 2em;
     line-height: 2em;
     font-family: "Times New Roman", Georgia, Serif;
     border: 1px solid rgb(225, 225, 225);
+}
+fieldset, blockquote{
+    margin: 1em 2em 0 1em;
     padding: 1.5em;
 }
-body{
-    padding:2em;
+footer{
+    margin-top: 1.5em;
+}
+fieldset{
+    border:none;
+}
+a{
+    color: #0078e7;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
 }
 .changed{
     color: #dd1144;
@@ -42,4 +62,36 @@ user-content.updated{
 @keyframes curse  {
     from { opacity: .7; }
     to {  opacity: .2;}
+}
+h1 small{
+    font-size: 0.5em;
+}
+
+/* overlay */
+aside{
+    position: absolute;
+    top: 0;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    z-index: 10;
+    -webkit-transition:opacity 1s;
+    transition:left 1s;
+}
+aside .content{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(225, 225, 225);
+    margin: 2em;
+    padding: 2em;
+    text-align: left;
+}
+aside.up{
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9); /*dim the background*/
+    width: 100%;
+    height: 100%;
+
+}
+aside .header{
+text-align: right;
 }

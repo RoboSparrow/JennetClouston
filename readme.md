@@ -6,7 +6,7 @@ Jennet Clouston Curse Generator
 About
 -----
 
-Jennet Clouston is a marginal character from Robert Lois Stevenson's novel ["Kidnapped"](http://en.wikipedia.org/wiki/Kidnapped_%28novel%29).
+Jennet Clouston is a marginal character from Robert Louis Stevenson's novel ["Kidnapped"](http://en.wikipedia.org/wiki/Kidnapped_%28novel%29).
 The main character David Balfour encounters the *stout, dark, sour-looking woman* on his way to the House of Shaws in Southern Scotland, the castle of his anchestors.
 
 Asked for the way to the mansion, Jennet casts **one of the best curses in literature** on the House of Shaws and it's current landlord, Ebenezer Balfour.

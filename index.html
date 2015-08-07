@@ -15,29 +15,46 @@
         <!--[if lt IE 8]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>Jenny Cluston's Curse Generator.</h1>
-
-        <form id="JennyCloustonsCurseForm" role="form">
-            <p>
-                Jenny Clouston, ye shall curse
-                <input type="text" data-index="1" id="Name" name="name" placeholder="Name">!
-                <select id="Sex" data-index="2" name="sex">
-                    <option value="him,his" >He</option>
-                    <option value="her,her" >She</option>
-                </select> belongs to the house of
-                <input type="text" data-index="0" id="House" name="house" placeholder="House">.
-            </p>
-            <blockquote id="JennyCloustonsCurse" class="text-justify"><jenny>"That is the house of <user-content key="House">Shaws</user-content>!"</jenny><narrator> she cried. </narrator><jenny>"Blood built it; blood stopped the building of it; blood shall bring it down. See here!"</jenny><narrator> she cried again - </narrator><jenny>"I spit upon the ground, and crack my thumb at it! Black be its fall! If ye see <user-content key="Name">the laird</user-content>, tell <user-content key="Sex">him</user-content> what ye hear; tell <user-content key="Sex">him</user-content> this makes the twelve hunner and nineteen time that Jennet Clouston has called down the curse on <user-content key="Sex">him</user-content> and <user-content key="Sex" object="house">his</user-content> house, </jenny><jenny>byre and stable, man, guest, and master, wife, miss, or bairn</jenny><jenny> - black, black be their fall!</jenny>"</blockquote>
-            <p>
-                <button class="pure-button" id="Submit">Curse 'em!</button>
-            </p>
-
-            <footer>
+        <main>
+            <h1>Jenny Clouston Curse Generator</h1>
+            <p>Let Jenny speak a curse. <a href="#about">What's this?</a></p>
+            <form id="JennyCloustonsCurseForm" role="form">
+                <fieldset>
+                    Jenny Clouston, ye shall curse
+                    <input type="text" data-index="1" id="Name" name="name" placeholder="Name">!
+                    <select id="Sex" data-index="2" name="sex">
+                        <option value="him,his" >He</option>
+                        <option value="her,her" >She</option>
+                    </select> belongs to the house of
+                    <input type="text" data-index="0" id="House" name="house" placeholder="House">.
+                </fieldset>
+                <blockquote id="JennyCloustonsCurse" class="text-justify"><jenny>"That is the house of <user-content key="House">Shaws</user-content>!"</jenny><narrator> she cried. </narrator><jenny>"Blood built it; blood stopped the building of it; blood shall bring it down. See here!"</jenny><narrator> she cried again - </narrator><jenny>"I spit upon the ground, and crack my thumb at it! Black be its fall! If ye see <user-content key="Name">the laird</user-content>, tell <user-content key="Sex">him</user-content> what ye hear; tell <user-content key="Sex">him</user-content> this makes the twelve hunner and nineteen time that Jennet Clouston has called down the curse on <user-content key="Sex">him</user-content> and <user-content key="Sex" object="house">his</user-content> house, </jenny><jenny>byre and stable, man, guest, and master, wife, miss, or bairn</jenny><jenny> - black, black be their fall!</jenny>"</blockquote>
                 <p>
-                    Powered by <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html" target="_blank">Web Speech API</a>
+                    <button class="pure-button" id="Submit">Curse 'em!</button>
                 </p>
-            </footer>
-        </form>
+
+                <footer>
+                    <p>
+                        Powered by <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html" target="_blank">Web Speech API</a> | Project on <a href="https://github.com/RoboSparrow/JennetClouston">Github</a>
+                    </p>
+                </footer>
+            </form>
+        </main>
+        <aside id="About">
+            <div class="content">
+                <div class="header"><a href="#home">close</a></div>
+                <h2>Hoot, hoot! Jenny Clouston at ye service.</h2>
+                <p>
+                    Jennet Clouston is a marginal character from Robert Louis Stevenson's novel <a href="https://en.wikipedia.org/wiki/Kidnapped_%28novel%29" target="_blank">"Kidnapped"</a>. The main character David Balfour meets the <q>"stout, dark, sour-looking woman"</q> on his way to the House of Shaws in Southern Scotland, the castle of his anchestors.
+                    Asked for the way to the mansion, Jennet casts one of the best curses in literature on the House of Shaws and it's current landlord, Ebenezer Balfour.
+                </p>
+                <p>Let Jennet speak your personal curse!</p>
+                <h3>A word about the Web Speech Api</h3>
+                <p>The <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html" target="_blank"> Web Speech API</a> is a relatively new HTML5 standard intended to enable browsers to render text to audio and audio to text.</p>
+                <p>The API is not implemented yet on most browsers and even if it is, then it depends also on your system. <a href="http://chrome.blogspot.com.au/2013/02/bringing-voice-recognition-to-web.html" target="_blank">Google/Chrome</a> and Apple/Safari claim full support, however testing shows that there are still a number of issues and inconsistencies in regards to sound buffering and performance.</p>
+                <p>So chance are that the app actually doesn't work on your device.</p>
+            </div>
+        </aside>
         <!-- GA -->
         <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
