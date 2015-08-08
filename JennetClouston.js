@@ -2,8 +2,6 @@
 var Jennet = (function( window, undefined) {
     'use strict';
 
-    var defaults = ['Shaws', 'the laird', 'him', 'his'];
-    var classes = ['house', 'name', 'sex', 'sex1'];
     var parent;
     var logger;
     var progress = 0;
@@ -140,14 +138,14 @@ Jennet.Speech = (function( window, document, undefined) {
         if(filtered.length){
             voices.female = filtered[0];
         }
-    }
+    };
 
     var getVoices = function(){
         // only partial support for `onvoiceschanged` event
         if('onvoiceschanged' in speechSynthesis) {
             speechSynthesis.onvoiceschanged = function(){
                 selectVoices();
-            }
+            };
         } else {
             selectVoices();
         }
@@ -185,26 +183,28 @@ Jennet.Speech = (function( window, document, undefined) {
         document.getElementById('Submit').disabled = true;
         document.getElementById('Submit').textContent = 'Testing...';
 
-
         document.addEventListener('_canSpeak:success', function(e){
             document.getElementById('Submit').disabled = false;
             document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').textContent = 'Curse \'em!';
+            ga('send', 'event', 'webSpeechApi', 'success');//anonymously reporting device support
         }, false);
         document.addEventListener('_canSpeak:fail:Api', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
             Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Web Speech API</a>.', 'error');
+            ga('send', 'event', 'webSpeechApi', 'fail', 'noSupport');
         }, false);
         document.addEventListener('_canSpeak:fail:System', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
             Jennet.log('Darn! Your system cannot render Webspeech Audio.', 'error');
+            ga('send', 'event', 'webSpeechApi', 'fail', 'testSpeak');
         }, false);
 
-        document.getElementById('Name').addEventListener('keyup', function(){Jennet.update(this)});
-        document.getElementById('Sex').addEventListener('change', function(){Jennet.update(this)});
-        document.getElementById('House').addEventListener('keyup', function(){Jennet.update(this)});
+        document.getElementById('Name').addEventListener('keyup', function(){Jennet.update(this);});
+        document.getElementById('Sex').addEventListener('change', function(){Jennet.update(this);});
+        document.getElementById('House').addEventListener('keyup', function(){Jennet.update(this);});
 
         Jennet.init(document.getElementById('JennyCloustonsCurse'));
         document.getElementById('Submit').addEventListener('click', function(e){
