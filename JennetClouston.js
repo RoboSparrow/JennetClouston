@@ -121,28 +121,48 @@ Jennet.Speech = (function( window, document, undefined) {
         if(!('SpeechSynthesisUtterance' in window)){
             document.dispatchEvent(canSpeakEvents.failApi);
             _canSpeak = false;
-        }
-        if(!speechSynthesis.getVoices().length){
-            document.dispatchEvent(canSpeakEvents.failVoices);
-            _canSpeak = false;
+            return;
         }
     };
 
     var selectVoices = function(){
-        var filtered;
-        var available = speechSynthesis.getVoices();
+        var english;
+        var females;
+        var males;
 
-        filtered = available.filter(function(voice) {
-            return (voice.lang === 'en-GB' && voice.name.toLowerCase().indexOf('male') > 0);
-        });
-        if(filtered.length){
-            voices.male = filtered[0];
+        var available = speechSynthesis.getVoices();
+        if(!available.length){
+            document.dispatchEvent(canSpeakEvents.failVoices);
+            _canSpeak = false;
+            return;
         }
-        filtered = available.filter(function(voice) {
-            return (voice.lang === 'en-GB' && voice.name.toLowerCase().indexOf('female') > 0);
+
+        // language & dialect
+        english = available.filter(function(voice) {
+            return (voice.lang === 'en-GB');
         });
-        if(filtered.length){
-            voices.female = filtered[0];
+        if(!english.length){
+            english = available.filter(function(voice) {
+                return (voice.lang === 'en-US');
+            });
+        }
+        if(!english.length){
+            english = available.filter(function(voice) {
+                return (voice.lang.indexOf('en-') >= 0);
+            });
+        }
+
+        // sex (chrome win, linux,ios, but not chromebook)
+        females = english.filter(function(voice) {
+            return (voice.name.toLowerCase().indexOf('female') > 0);
+        });
+        voices.female = (females.length) ? females[0] : english[0];
+        males = english.filter(function(voice) {
+            return (voice.name.toLowerCase().indexOf('male') > 0);
+        });
+        voices.male = (females.length) ? males[0] : null;
+        if(!voices.male){
+            voices.male = (english.length > 1) ? english[1] : english[0];
         }
     };
 
@@ -225,7 +245,7 @@ Jennet.Speech = (function( window, document, undefined) {
         document.addEventListener('_canSpeak:fail:Voices', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, no voices available.';
-            Jennet.log('Darn! The WebSpeech A{I could nod load any voices.', 'error');
+            Jennet.log('Darn! The WebSpeech API could nod load any voices.', 'error');
             ga('send', 'event', 'webSpeechApi', 'fail', 'noVoices');
         }, false);
         document.addEventListener('_canSpeak:fail:System', function(e){
