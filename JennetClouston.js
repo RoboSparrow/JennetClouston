@@ -47,7 +47,7 @@ var Jennet = (function( window, undefined) {
             nodes[i].textContent = formElement.value;
         }
     };
-    
+
     var read = function(start){
             start = start || false;
             if(start){
@@ -67,7 +67,7 @@ var Jennet = (function( window, undefined) {
             speechSynthesis.speak(story);
             progress++;
         };
-    
+
     return {
         init: init,
         log: log,
@@ -86,6 +86,7 @@ Jennet.Speech = (function( window, document, undefined) {
     var canSpeakEvents = {
         success: new Event('_canSpeak:success'),
         failApi: new Event('_canSpeak:fail:Api'),
+        failVoices: new Event('_canSpeak:fail:Voices'),
         failSystem: new Event('_canSpeak:fail:System')
     };
 
@@ -119,6 +120,10 @@ Jennet.Speech = (function( window, document, undefined) {
     var testAPI = function(){
         if(!('SpeechSynthesisUtterance' in window)){
             document.dispatchEvent(canSpeakEvents.failApi);
+            _canSpeak = false;
+        }
+        if(!speechSynthesis.getVoices().length){
+            document.dispatchEvent(canSpeakEvents.failVoices);
             _canSpeak = false;
         }
     };
@@ -176,7 +181,7 @@ Jennet.Speech = (function( window, document, undefined) {
         console.log('default voice: ', _default);
         console.log('selected voices: ', voices);
     };
-    
+
     return {
         init: function(){
             testAPI();
@@ -200,7 +205,7 @@ Jennet.Speech = (function( window, document, undefined) {
 (function(window) {
     'use strict';
     location.hash = '#home';
-    
+
     document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('Submit').disabled = true;
         document.getElementById('Submit').textContent = 'Testing...';
@@ -216,6 +221,12 @@ Jennet.Speech = (function( window, document, undefined) {
             document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
             Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Web Speech API</a>.', 'error');
             ga('send', 'event', 'webSpeechApi', 'fail', 'noSupport');
+        }, false);
+        document.addEventListener('_canSpeak:fail:Voices', function(e){
+            document.getElementById('Submit').disabled = true;
+            document.getElementById('Submit').textContent = 'Sorry, no voices available.';
+            Jennet.log('Darn! The WebSpeech A{I could nod load any voices.', 'error');
+            ga('send', 'event', 'webSpeechApi', 'fail', 'noVoices');
         }, false);
         document.addEventListener('_canSpeak:fail:System', function(e){
             document.getElementById('Submit').disabled = true;
@@ -242,7 +253,7 @@ Jennet.Speech = (function( window, document, undefined) {
             document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').disabled = false;
         }, false);
-        
+
        window.onhashchange = function(){
             switch(location.hash){
                 case '#about':
@@ -258,12 +269,12 @@ Jennet.Speech = (function( window, document, undefined) {
         };
 
     });
-    
+
     // log to console
     window.addEventListener('keydown', function(e){
         if (e.keyCode === 38) {//<Arrow UP> (logs to console);
             Jennet.Speech.devel();
         }
     }, false);
-    
+
 })(window);
