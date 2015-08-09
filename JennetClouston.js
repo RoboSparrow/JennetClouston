@@ -162,7 +162,17 @@ Jennet.Speech = (function( window, document, undefined) {
         console.log('--- Jennet.Speech.devel()');
         console.log('SpeechSynthesisUtterance: ', ('SpeechSynthesisUtterance' in window));
         console.log('_canSpeak: ', _canSpeak);
-        console.log('available voices: ', ('speechSynthesis' in window) ? speechSynthesis.getVoices() : null);
+        var available = ('speechSynthesis' in window) ? speechSynthesis.getVoices() : null;
+        console.log('available voices: ', available);
+        var _default = null;
+        if(available){
+            for(var i = 0; i < available.length; i++){
+                if(available[i].default){
+                    _default = available[i];
+                    break;
+                }
+            }
+        }
         console.log('selected voices: ', voices);
     };
     
@@ -237,10 +247,6 @@ Jennet.Speech = (function( window, document, undefined) {
                 case '#about':
                     document.getElementById('About').className = 'up';
                 break;
-                case '#devel':
-                    document.getElementById('Devel').className = 'up';
-                    Jennet.Speech.devel(document.querySelector('#Devel .content'));
-                break;
                 case '#home':
                     var nodes = document.querySelectorAll('.up');
                     for(var i = 0; i < nodes.length; i++){console.log(nodes[i]);
@@ -254,7 +260,7 @@ Jennet.Speech = (function( window, document, undefined) {
     
     // log to console
     window.addEventListener('keydown', function(e){
-        if (e.keyCode === 123 || e.keyCode === 38) {//F12
+        if (e.keyCode === 38) {//<Arrow UP> (logs to console);
             Jennet.Speech.devel();
         }
     }, false);
