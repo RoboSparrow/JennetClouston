@@ -47,6 +47,7 @@ var Jennet = (function( window, undefined) {
             nodes[i].textContent = formElement.value;
         }
     };
+    
     var read = function(start){
             start = start || false;
             if(start){
@@ -66,7 +67,7 @@ var Jennet = (function( window, undefined) {
             speechSynthesis.speak(story);
             progress++;
         };
-
+    
     return {
         init: init,
         log: log,
@@ -157,6 +158,14 @@ Jennet.Speech = (function( window, document, undefined) {
         return utterance;
     };
 
+    var devel = function(node){
+        console.log('--- Jennet.Speech.devel()');
+        console.log('SpeechSynthesisUtterance: ', ('SpeechSynthesisUtterance' in window));
+        console.log('_canSpeak: ', _canSpeak);
+        console.log('available voices: ', ('speechSynthesis' in window) ? speechSynthesis.getVoices() : null);
+        console.log('selected voices: ', voices);
+    };
+    
     return {
         init: function(){
             testAPI();
@@ -166,8 +175,10 @@ Jennet.Speech = (function( window, document, undefined) {
             }
         },
         onApiOk: onApiOk,
+        voices: voices,
         getVoices: getVoices,
-        speak: speak
+        speak: speak,
+        devel: devel
     };
 
 })(window, document);
@@ -177,8 +188,8 @@ Jennet.Speech = (function( window, document, undefined) {
 
 (function(window) {
     'use strict';
-
     location.hash = '#home';
+    
     document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('Submit').disabled = true;
         document.getElementById('Submit').textContent = 'Testing...';
@@ -220,11 +231,15 @@ Jennet.Speech = (function( window, document, undefined) {
             document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').disabled = false;
         }, false);
-
+        
        window.onhashchange = function(){
             switch(location.hash){
                 case '#about':
                     document.getElementById('About').className = 'up';
+                break;
+                case '#devel':
+                    document.getElementById('Devel').className = 'up';
+                    Jennet.Speech.devel(document.querySelector('#Devel .content'));
                 break;
                 case '#home':
                     var nodes = document.querySelectorAll('.up');
@@ -235,6 +250,13 @@ Jennet.Speech = (function( window, document, undefined) {
             }
         };
 
-
     });
+    
+    // log to console
+    window.addEventListener('keydown', function(e){
+        if (e.keyCode === 123) {//F12
+            Jennet.Speech.devel();
+        }
+    }, false);
+    
 })(window);
