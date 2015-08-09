@@ -173,6 +173,7 @@ Jennet.Speech = (function( window, document, undefined) {
                 }
             }
         }
+        console.log('default voice: ', _default);
         console.log('selected voices: ', voices);
     };
     
