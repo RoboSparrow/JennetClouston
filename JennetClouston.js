@@ -254,7 +254,7 @@ Jennet.Speech = (function( window, document, undefined) {
     
     // log to console
     window.addEventListener('keydown', function(e){
-        if (e.keyCode === 123) {//F12
+        if (e.keyCode === 123 || e.keyCode === 38) {//F12
             Jennet.Speech.devel();
         }
     }, false);
