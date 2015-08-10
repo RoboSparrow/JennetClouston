@@ -53,7 +53,7 @@ user-content.updated{
 }
 
 .cursing{
-    -webkit-animation: pusate 1s infinite alternate;
+    -webkit-animation: curse 1s infinite alternate;
     animation: curse 1s infinite alternate;
 }
 @-webkit-keyframes curse {
