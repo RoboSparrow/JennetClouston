@@ -107,11 +107,8 @@ Jennet.Speech = (function( window, document, undefined) {
              document.dispatchEvent(canSpeakEvents.failSystem);
             _canSpeak = false;
         };
-
         whisper.onend = function(){
-            if(_canSpeak){
                 document.dispatchEvent(canSpeakEvents.success);
-            }
 
         };
         speechSynthesis.speak(whisper);
