@@ -108,8 +108,7 @@ Jennet.Speech = (function( window, document, undefined) {
             _canSpeak = false;
         };
         whisper.onend = function(){
-                document.dispatchEvent(canSpeakEvents.success);
-
+            document.dispatchEvent(canSpeakEvents.success);
         };
         speechSynthesis.speak(whisper);
     };
@@ -231,25 +230,25 @@ Jennet.Speech = (function( window, document, undefined) {
             document.getElementById('Submit').disabled = false;
             document.getElementById('Submit').className = ('pure-button pure-button-primary');
             document.getElementById('Submit').textContent = 'Curse \'em!';
-            ga('send', 'event', 'webSpeechApi', 'success');//anonymously reporting device support
+            ga('send', 'event', '_canSpeak', 'success', 'whisper');//anonymously reporting device support
         }, false);
         document.addEventListener('_canSpeak:fail:Api', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
             Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Web Speech API</a>.', 'error');
-            ga('send', 'event', 'webSpeechApi', 'fail', 'noSupport');
+            ga('send', 'event', '_canSpeak', 'fail', 'api');
         }, false);
         document.addEventListener('_canSpeak:fail:Voices', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, no voices available.';
             Jennet.log('Darn! The WebSpeech API could nod load any voices.', 'error');
-            ga('send', 'event', 'webSpeechApi', 'fail', 'noVoices');
+            ga('send', 'event', '_canSpeak', 'fail', 'voices');
         }, false);
         document.addEventListener('_canSpeak:fail:System', function(e){
             document.getElementById('Submit').disabled = true;
             document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
             Jennet.log('Darn! Your system cannot render Webspeech Audio.', 'error');
-            ga('send', 'event', 'webSpeechApi', 'fail', 'testSpeak');
+            ga('send', 'event', '_canSpeak', 'fail', 'whisper');
         }, false);
 
         document.getElementById('Name').addEventListener('keyup', function(){Jennet.update(this);});
