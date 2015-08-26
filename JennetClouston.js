@@ -188,7 +188,7 @@ Jennet.Speech = (function( window, document, undefined) {
         var _default = null;
         if(available){
             for(var i = 0; i < available.length; i++){
-                if(available[i].default){
+                if(available[i]['default']){
                     _default = available[i];
                     break;
                 }
