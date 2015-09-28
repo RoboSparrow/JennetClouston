@@ -34,3 +34,7 @@ License
 =======
 
 Non-third party files are licensed under the [WTFPL](http://www.wtfpl.net/about/).
+
+> But a word once spoken who can recapture it?
+>
+> -- <cite>Robert Louis Stevenson, Kidnapped</cite>
