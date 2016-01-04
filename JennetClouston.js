@@ -222,40 +222,49 @@ Jennet.Speech = (function( window, document, undefined) {
     'use strict';
     location.hash = '#home';
 
+    document.addEventListener('_canSpeak:success', function(e){
+        document.getElementById('Submit').disabled = false;
+        document.getElementById('Submit').className = ('pure-button pure-button-primary');
+        document.getElementById('Submit').textContent = 'Curse \'em!';
+        ga('send', 'event', '_canSpeak', 'success', 'whisper');//anonymously reporting device support
+    }, false);
+
+    document.addEventListener('_canSpeak:fail:Api', function(e){
+        document.getElementById('Submit').disabled = true;
+        document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
+        Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Web Speech API</a>.', 'error');
+        ga('send', 'event', '_canSpeak', 'fail', 'api');
+    }, false);
+
+    document.addEventListener('_canSpeak:fail:Voices', function(e){
+        document.getElementById('Submit').disabled = true;
+        document.getElementById('Submit').textContent = 'Sorry, no voices available.';
+        Jennet.log('Darn! The WebSpeech API could nod load any voices.', 'error');
+        ga('send', 'event', '_canSpeak', 'fail', 'voices');
+    }, false);
+
+    document.addEventListener('_canSpeak:fail:System', function(e){
+        document.getElementById('Submit').disabled = true;
+        document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
+        Jennet.log('Darn! Your system cannot render Webspeech Audio.', 'error');
+        ga('send', 'event', '_canSpeak', 'fail', 'whisper');
+    }, false);
+
+    document.addEventListener('_jennet:curseEnd', function(e){
+        document.getElementById('Submit').className = ('pure-button pure-button-primary');
+        document.getElementById('Submit').disabled = false;
+    }, false);
+
     document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('Submit').disabled = true;
         document.getElementById('Submit').textContent = 'Testing...';
-
-        document.addEventListener('_canSpeak:success', function(e){
-            document.getElementById('Submit').disabled = false;
-            document.getElementById('Submit').className = ('pure-button pure-button-primary');
-            document.getElementById('Submit').textContent = 'Curse \'em!';
-            ga('send', 'event', '_canSpeak', 'success', 'whisper');//anonymously reporting device support
-        }, false);
-        document.addEventListener('_canSpeak:fail:Api', function(e){
-            document.getElementById('Submit').disabled = true;
-            document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
-            Jennet.log('Darn! Your browser doesn\'t support the <a href="http://caniuse.com/#feat=speech-recognition">Web Speech API</a>.', 'error');
-            ga('send', 'event', '_canSpeak', 'fail', 'api');
-        }, false);
-        document.addEventListener('_canSpeak:fail:Voices', function(e){
-            document.getElementById('Submit').disabled = true;
-            document.getElementById('Submit').textContent = 'Sorry, no voices available.';
-            Jennet.log('Darn! The WebSpeech API could nod load any voices.', 'error');
-            ga('send', 'event', '_canSpeak', 'fail', 'voices');
-        }, false);
-        document.addEventListener('_canSpeak:fail:System', function(e){
-            document.getElementById('Submit').disabled = true;
-            document.getElementById('Submit').textContent = 'Sorry, Web Speech not supported';
-            Jennet.log('Darn! Your system cannot render Webspeech Audio.', 'error');
-            ga('send', 'event', '_canSpeak', 'fail', 'whisper');
-        }, false);
 
         document.getElementById('Name').addEventListener('keyup', function(){Jennet.update(this);});
         document.getElementById('Sex').addEventListener('change', function(){Jennet.update(this);});
         document.getElementById('House').addEventListener('keyup', function(){Jennet.update(this);});
 
         Jennet.init(document.getElementById('JennyCloustonsCurse'));
+
         document.getElementById('Submit').addEventListener('click', function(e){
             e.preventDefault();
             if(e.target.disabled){
@@ -265,10 +274,6 @@ Jennet.Speech = (function( window, document, undefined) {
             e.target.disabled = true;
             Jennet.read(true);
         });
-        document.addEventListener('_jennet:curseEnd', function(e){
-            document.getElementById('Submit').className = ('pure-button pure-button-primary');
-            document.getElementById('Submit').disabled = false;
-        }, false);
 
        window.onhashchange = function(){
             switch(location.hash){
